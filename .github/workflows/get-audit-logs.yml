@@ -16,7 +16,7 @@ jobs:
         uses: ameydev/powershell-action@v1
         with:
           script: |
-          ./Get-AuditLogs.ps1 -TenantId "${{ secrets.ENTRA_TENANT_ID }}" `
+           ./Get-AuditLogs.ps1 -TenantId "${{ secrets.ENTRA_TENANT_ID }}" `
                                 -ClientId "${{ secrets.ENTRA_CLIENT_ID }}" `
                                 -ClientSecret "${{ secrets.ENTRA_CLIENT_SECRET }}" `
                                 -OneDriveUserId "${{ secrets.ONEDRIVE_USER_ID }}" `
