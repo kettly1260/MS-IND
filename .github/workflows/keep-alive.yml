@@ -1,0 +1,12 @@
+name: Vercel Keep-Alive
+
+on:
+  schedule:
+    - cron: '*/15 * * * *' # 每15分钟运行一次
+
+jobs:
+  ping-vercel-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping onedrive-index URL
+        run: curl -s ${{ secrets.VERCEL_APP_URL }} > /dev/null
