@@ -1,0 +1,23 @@
+name: Fetch and Archive M365 Audit Logs
+
+on:
+  schedule:
+    - cron: '10 0 * * *' # 每天 UTC 时间 00:10 运行
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  get-audit-logs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Run PowerShell script to fetch logs
+        uses: ameydev/powershell-action@v1
+        with:
+          script: |
+          ./Get-AuditLogs.ps1 -TenantId "${{ secrets.ENTRA_TENANT_ID }}" `
+                                -ClientId "${{ secrets.ENTRA_CLIENT_ID }}" `
+                                -ClientSecret "${{ secrets.ENTRA_CLIENT_SECRET }}" `
+                                -OneDriveUserId "${{ secrets.ONEDRIVE_USER_ID }}" `
+                                -TargetFolderPath "${{ secrets.ONEDRIVE_TARGET_FOLDER_PATH }}"
