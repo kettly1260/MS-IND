@@ -1,4 +1,4 @@
-# Get-AuditLogs.ps1 (Revised and Corrected Version)
+# Get-AuditLogs.ps1 (Corrected Version)
 
 param (
     [Parameter(Mandatory=$true)]
