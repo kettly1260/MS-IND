@@ -1,4 +1,4 @@
-# Get-AuditLogs.ps1 (Corrected Version)
+# Get-AuditLogs.ps1 (Final Corrected Version)
 
 param (
     [Parameter(Mandatory=$true)]
@@ -52,8 +52,8 @@ try {
     $startDate = $endDate.AddDays(-1)
     $filterString = "activityDateTime ge $($startDate.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")) and activityDateTime le $($endDate.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"))"
     
-    # 对筛选器字符串进行 URL 编码以确保安全
-    $encodedFilter =::UrlEncode($filterString)
+    # **修正部分**: 使用 [uri]::EscapeDataString 进行 URL 编码
+    $encodedFilter = [uri]::EscapeDataString($filterString)
     $auditLogUrl = "https://graph.microsoft.com/v1.0/auditLogs/directoryAudits?`$filter=$encodedFilter"
 
     Write-Host "Fetching audit logs from $startDate to $endDate..."
